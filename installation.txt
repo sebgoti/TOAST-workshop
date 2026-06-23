@@ -1,0 +1,58 @@
+## TOAST + spatialdata — Pixi installation
+
+Pixi uses conda-forge to resolve everything in one shot, avoiding the pip
+backtracking failures that occur when installing spatialdata into a plain
+conda environment.
+
+---
+
+### 1. Install Pixi (one-time, system-wide)
+
+    curl -fsSL https://pixi.sh/install.sh | bash
+
+Restart your terminal afterwards (or run: source ~/.zshrc)
+
+---
+
+### 2. Navigate to this directory
+
+    cd /Users/sebgoti/Documents/PhD/TOAST
+
+---
+
+### 3. Build the environment
+
+    pixi install
+
+Pixi reads pixi.toml in this directory, resolves all conda-forge packages
+(including spatialdata and its geospatial binary deps), then pip-installs
+the local TOAST package in editable mode.
+
+The environment is stored in .pixi/envs/default/ — it is self-contained
+and does not touch any existing conda environments.
+
+---
+
+### 4. Run a notebook
+
+    pixi run jupyter notebook
+
+Or drop into an interactive shell in the environment:
+
+    pixi shell
+
+---
+
+### 5. Adding packages later
+
+    pixi add <package-name>          # from conda-forge
+    pixi add --pypi <package-name>   # from PyPI
+
+---
+
+### Notes
+
+- pixi.toml is the environment specification file (equivalent to environment.yml).
+- The local TOAST package (toast-spatial-ot) is installed editable from
+  ../TOAST_repo/TOAST so edits to the source are immediately reflected.
+- To update all packages: pixi update
